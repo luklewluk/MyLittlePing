@@ -1,8 +1,10 @@
 <?php
 
-namespace luklew\Connection;
+namespace luklew\MyLittlePing\Connection;
 
 interface ConnectionInterface
 {
+    public function getErrorMessage();
+
     public function ping($host);
 }

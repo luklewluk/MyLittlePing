@@ -1,13 +1,18 @@
 <?php
 
-namespace luklew\Connection\NullConnection;
+namespace luklew\MyLittlePing\Connection\NullConnection;
 
-use luklew\Connection\ConnectionInterface;
+use luklew\MyLittlePing\Connection\ConnectionInterface;
 
 class NullConnection implements ConnectionInterface
 {
     public function ping($host)
     {
-        return (float)rand(5, 55);
+        return rand(5, 55);
+    }
+
+    public function getErrorMessage()
+    {
+        // TODO: Implement getErrorMessage() method.
     }
 }

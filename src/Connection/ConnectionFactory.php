@@ -1,19 +1,19 @@
 <?php
 
-namespace luklew\Connection;
+namespace luklew\MyLittlePing\Connection;
 
-use luklew\Config;
-use luklew\Connection\NullConnection\NullConnection;
+use luklew\MyLittlePing\Config;
 
 class ConnectionFactory
 {
-    public function create($config, $mode = NullConnection::class)
+    /**
+     * @param Config $config
+     *
+     * @return ConnectionInterface
+     */
+    public function create($config)
     {
-        return new $mode($config);
-    }
-
-    public function createNullConnection($config = null)
-    {
-        return $config === null ? new NullConnection(new Config()) : new NullConnection();
+        $className = $config->getDefaultConnection();
+        return new $className($config);
     }
 }

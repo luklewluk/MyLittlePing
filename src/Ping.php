@@ -1,8 +1,8 @@
 <?php
 
-namespace luklew;
+namespace luklew\MyLittlePing;
 
-use luklew\Connection\ConnectionFactory;
+use luklew\MyLittlePing\Connection\ConnectionFactory;
 
 class Ping
 {
@@ -26,6 +26,12 @@ class Ping
     {
         $connection = $this->connectionFactory->create($this->config);
 
-        return $connection->ping($host);
+        $latency = $connection->ping($host);
+        if ($connection->getErrorMessage() === null) {
+            return $latency;
+        }
+
+        // TODO: Add logger
+        return false;
     }
 }
