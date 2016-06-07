@@ -16,4 +16,15 @@ class ConnectionFactory
         $className = $config->getDefaultConnection();
         return new $className($config);
     }
+
+    /**
+     * @param string $type
+     * @param Config $config
+     * 
+     * @return ConnectionInterface
+     */
+    public function createOfType($type, $config)
+    {
+        return new $type($config);
+    }
 }
