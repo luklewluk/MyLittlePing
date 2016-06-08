@@ -12,43 +12,33 @@ class Packet
     /**
      * Type of ICMP message
      * Length: 8 bits
-     *
-     * @var string
      */
-    protected $type;
+    const PACKET_TYPE = "\x08";
 
     /**
      * Code
      * Length: 8 bits
-     *
-     * @var string
      */
-    protected $code;
+    const PACKET_CODE = "\x00";
+
+    /**
+     * Part of header data
+     * Length: 16 bits
+     */
+    const PACKET_IDENTIFIER = "\x00\x00";
+
+    /**
+     * Part of header data
+     * Length: 16 bits
+     */
+    const PACKET_SEQUENCE = "\x00\x00";
 
     /**
      * Checksum calculated with the ICMP
      * part of packet
      * Length: 16 bits
-     *
-     * @var string
      */
-    protected $checksum;
-
-    /**
-     * Part of header data
-     * Length: 16 bits
-     *
-     * @var string
-     */
-    protected $identifier;
-
-    /**
-     * Part of header data
-     * Length: 16 bits
-     *
-     * @var string
-     */
-    protected $sequence;
+    protected $checksum = "\x00\x00";
 
     /**
      * Payload data sending with a ping.
@@ -59,19 +49,6 @@ class Packet
     protected $payload;
 
     /**
-     * Set Ping packet values
-     */
-    public function __construct()
-    {
-        $this->type = "\x08";
-        $this->code = "\x00";
-        $this->checksum = "\x00\x00";
-        $this->identifier = "\x00\x00";
-        $this->sequence = "\x00\x00";
-        $this->payload = 'a';
-    }
-
-    /**
      * Get all packet parts as a string
      *
      * @return string
@@ -79,11 +56,11 @@ class Packet
     public function getPacketString()
     {
         return
-            $this->type .
-            $this->code .
+            self::PACKET_TYPE .
+            self::PACKET_CODE .
             $this->checksum .
-            $this->identifier .
-            $this->sequence .
+            self::PACKET_IDENTIFIER .
+            self::PACKET_SEQUENCE .
             $this->payload;
     }
 

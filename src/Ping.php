@@ -5,6 +5,11 @@ namespace luklew\MyLittlePing;
 use luklew\MyLittlePing\Connection\ConnectionFactory;
 use luklew\MyLittlePing\Connection\ConnectionInterface;
 
+/**
+ * Main Ping library class
+ *
+ * @package luklew\MyLittlePing
+ */
 class Ping
 {
     /**
@@ -35,17 +40,19 @@ class Ping
 
     public function send($host)
     {
-        if ($this->connectionFactory === null) {
+        if ($this->connection === null) {
             $this->createDefaultConnection();
         }
-            
-        $latency = $this->connection->ping($host);
+
+        $this->connection->ping($host);
+        $latency = $this->connection->getLatency();
+
         if ($this->connection->getErrorMessage() === null) {
             return $latency;
         }
 
         // TODO: Add logger
-        return false;
+        return null;
     }
 
     /**

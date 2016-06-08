@@ -8,11 +8,16 @@ class NullConnection implements ConnectionInterface
 {
     public function ping($host)
     {
-        return rand(5, 55);
+        //
     }
 
     public function getErrorMessage()
     {
         // TODO: Implement getErrorMessage() method.
+    }
+
+    public function getLatency()
+    {
+        return rand(5, 55);
     }
 }

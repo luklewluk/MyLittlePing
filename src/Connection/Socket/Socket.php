@@ -20,6 +20,7 @@ class Socket implements ConnectionInterface
     protected $resource;
 
     protected $errorMessage;
+    protected $latency;
 
     public function __construct(Config $config, Packet $packet = null)
     {
@@ -55,7 +56,7 @@ class Socket implements ConnectionInterface
             // Close the socket.
             socket_close($socket);
 
-            return $latency;
+            $this->latency = $latency;
 
         } catch (\Exception $e) {
             $this->errorMessage = $e->getMessage();
@@ -65,5 +66,10 @@ class Socket implements ConnectionInterface
     public function getErrorMessage()
     {
         return $this->errorMessage;
+    }
+
+    public function getLatency()
+    {
+        return $this->latency;
     }
 }

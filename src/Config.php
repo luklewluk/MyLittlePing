@@ -2,11 +2,26 @@
 
 namespace luklew\MyLittlePing;
 
+/**
+ * Configuration class
+ *
+ * @package luklew\MyLittlePing
+ */
 class Config
 {
+    /**
+     * Port used to ping
+     *
+     * @var int
+     */
     protected $port = 80;
 
-    protected $payload = 'ping';
+    /**
+     * Data "attached" to ping packet
+     *
+     * @var string
+     */
+    protected $payload = 'a';
 
     /**
      * @var string[]
