@@ -51,7 +51,7 @@ class Packet
     /**
      * Get all packet parts as a string
      *
-     * @return string
+     * @return string Packet
      */
     public function getPacketString()
     {
@@ -88,7 +88,9 @@ class Packet
     }
 
     /**
-     * @return string
+     * Get payload
+     *
+     * @return string Payload
      */
     public function getPayload()
     {
@@ -96,6 +98,8 @@ class Packet
     }
 
     /**
+     * Set payload
+     *
      * @param string $payload
      */
     public function setPayload($payload)

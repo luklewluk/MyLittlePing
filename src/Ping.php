@@ -13,31 +13,49 @@ use luklew\MyLittlePing\Connection\ConnectionInterface;
 class Ping
 {
     /**
+     * Settings for connection
+     *
      * @var Config
      */
     protected $config;
 
     /**
-     * @var ConnectionFactory
-     */
-    protected $connectionFactory;
-
-    /**
+     * Connection method used to ping host
+     *
      * @var ConnectionInterface
      */
     protected $connection;
 
-    public function __construct($config = null)
+
+    /**
+     * Constructor
+     *
+     * @param Config $config Configuration
+     */
+    public function __construct(Config $config)
     {
-        $this->connectionFactory = new ConnectionFactory();
-        $this->config = $config === null ? new Config() : $config;
-    }
-    
-    public function createConnection($connectionType)
-    {
-        $this->connection = $this->connectionFactory->createOfType($connectionType, $this->config);
+        $this->config = $config;
     }
 
+    /**
+     * Call the connection factory to create a connection instance
+     *
+     * @param string $connectionType Connection class name
+     *
+     * @return void
+     */
+    public function createConnection($connectionType)
+    {
+        $this->connection = ConnectionFactory::createOfType($connectionType, $this->config);
+    }
+
+    /**
+     * Send ping to get latency
+     *
+     * @param string $host Destination host
+     *
+     * @return int|null Ping latency
+     */
     public function send($host)
     {
         if ($this->connection === null) {
@@ -56,10 +74,12 @@ class Ping
     }
 
     /**
+     * Create instance of default connection
+     *
      * @return void
      */
     protected function createDefaultConnection()
     {
-        $this->connection = $this->connectionFactory->create($this->config);
+        $this->connection = ConnectionFactory::create($this->config);
     }
 }

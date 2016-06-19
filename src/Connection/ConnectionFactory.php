@@ -4,26 +4,36 @@ namespace luklew\MyLittlePing\Connection;
 
 use luklew\MyLittlePing\Config;
 
+/**
+ * Factory for connections
+ *
+ * @package luklew\MyLittlePing\Connection
+ */
 class ConnectionFactory
 {
     /**
-     * @param Config $config
+     * Create a new instance of default
+     * connection set in config
+     *
+     * @param Config $config Configuration
      *
      * @return ConnectionInterface
      */
-    public function create($config)
+    public static function create($config)
     {
         $className = $config->getDefaultConnection();
         return new $className($config);
     }
 
     /**
-     * @param string $type
-     * @param Config $config
+     * Create a new instance of given class name
+     *
+     * @param string $type      Class name
+     * @param Config $config    Configuration
      * 
      * @return ConnectionInterface
      */
-    public function createOfType($type, $config)
+    public static function createOfType($type, $config)
     {
         return new $type($config);
     }

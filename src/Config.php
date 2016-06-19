@@ -3,7 +3,7 @@
 namespace luklew\MyLittlePing;
 
 /**
- * Configuration class
+ * Options for ping
  *
  * @package luklew\MyLittlePing
  */
@@ -24,22 +24,36 @@ class Config
     protected $payload = 'a';
 
     /**
+     * All connections as class names
+     *
      * @var string[]
      */
     protected $connections;
 
+    /**
+     * Add a new connection method
+     *
+     * @param string $connection Connection class name
+     */
     public function addConnection($connection)
     {
         $this->connections[] = $connection;
     }
 
+    /**
+     * Gets first connection from the list
+     *
+     * @return string Connection type
+     */
     public function getDefaultConnection()
     {
         return $this->connections[0];
     }
 
     /**
-     * @return string
+     * Get payload
+     *
+     * @return string Payload
      */
     public function getPayload()
     {
@@ -47,7 +61,9 @@ class Config
     }
 
     /**
-     * @param string $payload
+     * Set payload
+     *
+     * @param string $payload Payload
      */
     public function setPayload($payload)
     {
@@ -55,7 +71,9 @@ class Config
     }
 
     /**
-     * @return string[]
+     * Get all connections
+     *
+     * @return string[] Connections list
      */
     public function getConnections()
     {
@@ -63,7 +81,9 @@ class Config
     }
 
     /**
-     * @param string[] $connections
+     * Set list of connections
+     *
+     * @param string[] $connections Connections list
      */
     public function setConnections($connections)
     {

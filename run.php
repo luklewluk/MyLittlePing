@@ -13,14 +13,22 @@ require_once 'src/Connection/NullConnection/NullConnection.php';
 require_once 'src/Connection/Socket/Socket.php';
 require_once 'src/Connection/Socket/Packet.php';
 
+// New config instance
 $config = new Config();
 
+// Add connection types (also your own implementation)
+$config->addConnection(Socket::class);
+$config->addConnection(NullConnection::class);
+
+// Or using array way
 $connections = [
     Socket::class,
     NullConnection::class,
 ];
-
 $config->setConnections($connections);
 
+// New application instance
 $ping = new Ping($config);
-echo $ping->send('allegro.pl') . PHP_EOL;
+
+// Ping
+echo $ping->send('google.com') . PHP_EOL;

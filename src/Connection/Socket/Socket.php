@@ -5,23 +5,47 @@ namespace luklew\MyLittlePing\Socket;
 use luklew\MyLittlePing\Config;
 use luklew\MyLittlePing\Connection\ConnectionInterface;
 
+/**
+ * Socket implementation of connection
+ *
+ * @package luklew\MyLittlePing\Socket
+ */
 class Socket implements ConnectionInterface
 {
     /**
+     * Data packet
+     *
      * @var Packet
      */
     protected $packet;
 
     /**
+     * Configuration
+     *
      * @var Config
      */
     protected $config;
 
-    protected $resource;
-
+    /**
+     * Error message
+     *
+     * @var string
+     */
     protected $errorMessage;
+
+    /**
+     * Latency in milliseconds
+     *
+     * @var int
+     */
     protected $latency;
 
+    /**
+     * Constructor
+     *
+     * @param Config        $config Configuration
+     * @param Packet|null   $packet Data packet
+     */
     public function __construct(Config $config, Packet $packet = null)
     {
         $this->config = $config;
@@ -29,8 +53,13 @@ class Socket implements ConnectionInterface
         $this->packet->setPayload($config->getPayload());
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function ping($host)
     {
+        // TODO: Move the logic into separated methods
+
         $package = $this->packet->generateChecksum()->getPacketString();
 
         try {
@@ -63,11 +92,17 @@ class Socket implements ConnectionInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getErrorMessage()
     {
         return $this->errorMessage;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLatency()
     {
         return $this->latency;
