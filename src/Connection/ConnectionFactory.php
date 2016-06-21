@@ -27,10 +27,10 @@ class ConnectionFactory
     }
 
     /**
-     * Create a new instance of given class name
+     * Create a new instance using class name or instance
      *
-     * @param string $type      Class name
-     * @param Config $config    Configuration
+     * @param string|ConnectionInterface $type      Connection
+     * @param Config                     $config    Configuration
      * 
      * @return ConnectionInterface
      */

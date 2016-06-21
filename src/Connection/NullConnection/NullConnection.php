@@ -12,7 +12,6 @@ use luklew\MyLittlePing\Connection\ConnectionInterface;
  */
 class NullConnection implements ConnectionInterface
 {
-
     /**
      * {@inheritdoc}
      * 
