@@ -15,6 +15,10 @@ class NullConnection implements ConnectionInterface
 
     /**
      * {@inheritdoc}
+     * 
+     * @param string $host Destination host
+     * 
+     * @return void
      */
     public function ping($host)
     {
@@ -22,6 +26,8 @@ class NullConnection implements ConnectionInterface
 
     /**
      * {@inheritdoc}
+     * 
+     * @return void
      */
     public function getErrorMessage()
     {
@@ -29,6 +35,8 @@ class NullConnection implements ConnectionInterface
 
     /**
      * {@inheritdoc}
+     * 
+     * @return int
      */
     public function getLatency()
     {

@@ -22,6 +22,7 @@ class ConnectionFactory
     public static function create($config)
     {
         $className = $config->getDefaultConnection();
+        
         return new $className($config);
     }
 

@@ -55,6 +55,10 @@ class Socket implements ConnectionInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param string $host Destination host
+     *
+     * @return void
      */
     public function ping($host)
     {
@@ -94,6 +98,8 @@ class Socket implements ConnectionInterface
 
     /**
      * {@inheritdoc}
+     * 
+     * @return string Error message
      */
     public function getErrorMessage()
     {
@@ -102,6 +108,8 @@ class Socket implements ConnectionInterface
 
     /**
      * {@inheritdoc}
+     * 
+     * @return int Latency in milliseconds
      */
     public function getLatency()
     {
