@@ -38,18 +38,6 @@ class Ping
     }
 
     /**
-     * Call the connection factory to create a connection instance
-     *
-     * @param string $connectionType Connection class name
-     *
-     * @return void
-     */
-    public function createConnection($connectionType)
-    {
-        $this->connection = ConnectionFactory::createOfType($connectionType, $this->config);
-    }
-
-    /**
      * Send ping to get latency
      *
      * @param string $host Destination host
@@ -71,6 +59,18 @@ class Ping
 
         // TODO: Add logger
         return null;
+    }
+
+    /**
+     * Call the connection factory to create a connection instance
+     *
+     * @param string $connectionType Connection class name
+     *
+     * @return void
+     */
+    public function createConnection($connectionType)
+    {
+        $this->connection = ConnectionFactory::createOfType($connectionType, $this->config);
     }
 
     /**
