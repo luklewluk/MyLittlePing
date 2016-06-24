@@ -73,7 +73,7 @@ class Socket implements ConnectionInterface
                     'usec' => 0,
                 ));
                 // Prevent errors from being printed when host is unreachable.
-                @socket_connect($socket, $host, null);
+                @socket_connect($socket, $host, $this->config->getPort());
                 $start = microtime(true);
                 // Send the package.
                 @socket_send($socket, $package, strlen($package), 0);

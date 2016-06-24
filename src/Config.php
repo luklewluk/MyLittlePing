@@ -2,8 +2,6 @@
 
 namespace luklew\MyLittlePing;
 
-use luklew\MyLittlePing\Connection\ConnectionInterface;
-
 /**
  * Options for ping
  *
@@ -26,33 +24,6 @@ class Config
     protected $payload = 'a';
 
     /**
-     * All connections as class names and instances
-     *
-     * @var string[]
-     */
-    protected $connections;
-
-    /**
-     * Add a new connection method
-     *
-     * @param string|ConnectionInterface $connection Connection class instance or string
-     */
-    public function addConnection($connection)
-    {
-        $this->connections[] = $connection;
-    }
-
-    /**
-     * Gets first connection from the list
-     *
-     * @return string|ConnectionInterface Connection type
-     */
-    public function getDefaultConnection()
-    {
-        return $this->connections[0];
-    }
-
-    /**
      * Get payload
      *
      * @return string Payload
@@ -73,22 +44,22 @@ class Config
     }
 
     /**
-     * Get all connections
+     * Get connection port
      *
-     * @return string|ConnectionInterface[] Connections list
+     * @return int Connection port
      */
-    public function getConnections()
+    public function getPort()
     {
-        return $this->connections;
+        return $this->port;
     }
 
     /**
-     * Set list of connections
+     * Set connection port
      *
-     * @param string||ConnectionInterface[] $connections Connections list
+     * @param int $port Connection port
      */
-    public function setConnections($connections)
+    public function setPort($port)
     {
-        $this->connections = $connections;
+        $this->port = $port;
     }
 }

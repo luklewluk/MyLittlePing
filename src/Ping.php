@@ -2,6 +2,7 @@
 
 namespace luklew\MyLittlePing;
 
+use luklew\MyLittlePing\Connection\ConnectionManager;
 use luklew\MyLittlePing\Connection\ConnectionFactory;
 use luklew\MyLittlePing\Connection\ConnectionInterface;
 
@@ -20,21 +21,31 @@ class Ping
     protected $config;
 
     /**
+     * Connection Manager
+     *
+     * @var ConnectionManager
+     */
+    protected $connectionManager;
+
+    /**
      * Connection method used to ping host
      *
      * @var ConnectionInterface
      */
     protected $connection;
 
-
     /**
      * Constructor
      *
-     * @param Config $config Configuration
+     * @param Config|null            $config            Configuration
+     * @param ConnectionManager|null $connectionManager Connection Manager
      */
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
+    public function __construct(
+        Config $config = null,
+        ConnectionManager $connectionManager = null
+    ) {
+        $this->config = $config !== null ? $config : new Config();
+        $this->connectionManager = $connectionManager !== null ? $connectionManager : new ConnectionManager();
     }
 
     /**
@@ -47,7 +58,7 @@ class Ping
     public function send($host)
     {
         if ($this->connection === null) {
-            $this->createDefaultConnection();
+            $this->connection = $this->createDefaultConnection();
         }
 
         $this->connection->ping($host);
@@ -66,20 +77,22 @@ class Ping
      *
      * @param string $connectionType Connection class name
      *
-     * @return void
+     * @return ConnectionInterface
      */
     public function createConnection($connectionType)
     {
-        $this->connection = ConnectionFactory::createOfType($connectionType, $this->config);
+        return $this->connection = ConnectionFactory::create($connectionType, $this->config);
     }
 
     /**
      * Create instance of default connection
      *
-     * @return void
+     * @return ConnectionInterface
      */
     protected function createDefaultConnection()
     {
-        $this->connection = ConnectionFactory::create($this->config);
+        $connectionType = $this->connectionManager->getDefaultConnection();
+
+        return $this->createConnection($connectionType);
     }
 }
