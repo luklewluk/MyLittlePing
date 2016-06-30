@@ -68,8 +68,15 @@ class Ping
             return $latency;
         }
 
-        // TODO: Add logger
-        return null;
+        $nextConnection = $this->connectionManager->getNextConnection();
+        if ($nextConnection === false) {
+            // TODO: Add logger
+
+            return null;
+        }
+        $this->connection = $this->createConnection($nextConnection);
+
+        return $this->send($host);
     }
 
     /**
@@ -79,9 +86,9 @@ class Ping
      *
      * @return ConnectionInterface
      */
-    public function createConnection($connectionType)
+    protected function createConnection($connectionType)
     {
-        return $this->connection = ConnectionFactory::create($connectionType, $this->config);
+        return ConnectionFactory::create($connectionType, $this->config);
     }
 
     /**

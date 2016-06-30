@@ -42,6 +42,17 @@ class ConnectionManager
     }
 
     /**
+     * Get following connection type from the array
+     * by moving pointer to the next position
+     *
+     * @return string|ConnectionInterface|false Connection type
+     */
+    public function getNextConnection()
+    {
+        return next($this->connections);
+    }
+
+    /**
      * Get all connections
      *
      * @return string|ConnectionInterface[] Connections list

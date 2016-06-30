@@ -16,14 +16,21 @@ require_once 'src/Connection/Socket/Packet.php';
 
 // Basic usage
 $ping = new Ping();
-echo $ping->send('google.com');
+echo $ping->send('google.com') . PHP_EOL;
 
 // Set different port
 $config = new Config();
 $config->setPort(8080);
 
 $ping = new Ping($config);
-echo $ping->send('google.com');
+echo $ping->send('google.com') . PHP_EOL;
+
+// Connection queue (use next connection if error occurred)
+$connectionManager = new ConnectionManager();
+$connectionManager->addConnection(NullConnection::class);
+
+$ping = new Ping(null, $connectionManager);
+echo $ping->send('google.com') . PHP_EOL;
 
 // Use your own implementations of connection
 $connectionManager = new ConnectionManager();
