@@ -1,11 +1,11 @@
 <?php
 
-namespace luklew\MyLittlePing\Socket;
+namespace luklew\MyLittlePing\Connection\Socket;
 
 /**
  * Class of ICMP packet
  *
- * @package luklew\MyLittlePing
+ * @package luklew\MyLittlePing\Connection\Socket
  */
 class Packet
 {

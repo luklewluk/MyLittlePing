@@ -2,12 +2,12 @@
 
 namespace luklew\MyLittlePing\Connection;
 
-use luklew\MyLittlePing\Socket\Socket;
+use luklew\MyLittlePing\Connection\Socket\Socket;
 
 /**
  * Manage connections
  *
- * @package luklew\Connection
+ * @package luklew\MyLittlePing\Connection
  */
 class ConnectionManager
 {

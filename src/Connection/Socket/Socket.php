@@ -1,6 +1,6 @@
 <?php
 
-namespace luklew\MyLittlePing\Socket;
+namespace luklew\MyLittlePing\Connection\Socket;
 
 use luklew\MyLittlePing\Config;
 use luklew\MyLittlePing\Connection\ConnectionInterface;
@@ -8,7 +8,7 @@ use luklew\MyLittlePing\Connection\ConnectionInterface;
 /**
  * Socket implementation of connection
  *
- * @package luklew\MyLittlePing\Socket
+ * @package luklew\MyLittlePing\Connection\Socket
  */
 class Socket implements ConnectionInterface
 {
