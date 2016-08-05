@@ -41,6 +41,13 @@ class Socket implements ConnectionInterface
     protected $latency;
 
     /**
+     * Package string
+     *
+     * @var string
+     */
+    protected $package;
+
+    /**
      * Constructor
      *
      * @param Config        $config Configuration
@@ -50,7 +57,6 @@ class Socket implements ConnectionInterface
     {
         $this->config = $config;
         $this->packet = $packet === null ? new Packet() : $packet;
-        $this->packet->setPayload($config->getPayload());
     }
 
     /**
@@ -62,10 +68,16 @@ class Socket implements ConnectionInterface
      */
     public function ping($host)
     {
+        // TODO: IF added temporary due to issue that disallows generate checksum twice
+        if ($this->package === null) {
+            $this->package = $this->packet
+                ->setPayload($this->config->getPayload())
+                ->generateChecksum()
+                ->getPacketString()
+            ;
+        }
+
         // TODO: Move the logic into separated methods
-
-        $package = $this->packet->generateChecksum()->getPacketString();
-
         try {
             if (@$socket = socket_create(AF_INET, SOCK_RAW, 1)) {
                 socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array(
@@ -76,7 +88,7 @@ class Socket implements ConnectionInterface
                 @socket_connect($socket, $host, $this->config->getPort());
                 $start = microtime(true);
                 // Send the package.
-                @socket_send($socket, $package, strlen($package), 0);
+                @socket_send($socket, $this->package, strlen($this->package), 0);
                 if (socket_read($socket, 255) !== false) {
                     $latency = microtime(true) - $start;
                     $latency = round($latency * 1000);

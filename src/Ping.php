@@ -2,7 +2,6 @@
 
 namespace luklew\MyLittlePing;
 
-use luklew\MyLittlePing\Connection\ConnectionManager;
 use luklew\MyLittlePing\Connection\ConnectionFactory;
 use luklew\MyLittlePing\Connection\ConnectionInterface;
 
@@ -21,13 +20,6 @@ class Ping
     protected $config;
 
     /**
-     * Connection Manager
-     *
-     * @var ConnectionManager
-     */
-    protected $connectionManager;
-
-    /**
      * Connection method used to ping host
      *
      * @var ConnectionInterface
@@ -37,15 +29,15 @@ class Ping
     /**
      * Constructor
      *
-     * @param Config|null            $config            Configuration
-     * @param ConnectionManager|null $connectionManager Connection Manager
+     * @param ConnectionInterface $connection Connection
+     * @param Config              $config     Configuration
      */
     public function __construct(
-        Config $config = null,
-        ConnectionManager $connectionManager = null
+        ConnectionInterface $connection,
+        Config $config = null
     ) {
-        $this->config = $config !== null ? $config : new Config();
-        $this->connectionManager = $connectionManager !== null ? $connectionManager : new ConnectionManager();
+        $this->connection = $connection;
+        $this->config = $config;
     }
 
     /**
@@ -57,10 +49,6 @@ class Ping
      */
     public function send($host)
     {
-        if ($this->connection === null) {
-            $this->connection = $this->createDefaultConnection();
-        }
-
         $this->connection->ping($host);
         $latency = $this->connection->getLatency();
 
@@ -68,38 +56,43 @@ class Ping
             return $latency;
         }
 
-        $nextConnection = $this->connectionManager->getNextConnection();
-        if ($nextConnection === false) {
-            // TODO: Add logger
-
-            return null;
-        }
-        $this->connection = $this->createConnection($nextConnection);
-
-        return $this->send($host);
+        return null;
     }
 
     /**
-     * Call the connection factory to create a connection instance
+     * Get connection
+     *
+     * @return ConnectionInterface
+     */
+    public function getConnection()
+    {
+        return $this->connection;
+    }
+
+    /**
+     * Set connection
+     *
+     * @param ConnectionInterface $connection Connection
+     *
+     * @return void
+     */
+    public function setConnection(ConnectionInterface $connection)
+    {
+        $this->connection = $connection;
+    }
+
+    /**
+     * Static Ping object creator
      *
      * @param string $connectionType Connection class name
      *
-     * @return ConnectionInterface
+     * @return Ping
      */
-    protected function createConnection($connectionType)
+    public static function createWithConnection($connectionType)
     {
-        return ConnectionFactory::create($connectionType, $this->config);
-    }
+        $config = new Config();
+        $connection = ConnectionFactory::create($connectionType, $config);
 
-    /**
-     * Create instance of default connection
-     *
-     * @return ConnectionInterface
-     */
-    protected function createDefaultConnection()
-    {
-        $connectionType = $this->connectionManager->getDefaultConnection();
-
-        return $this->createConnection($connectionType);
+        return new static($connection, $config);
     }
 }
