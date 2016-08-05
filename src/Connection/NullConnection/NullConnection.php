@@ -2,7 +2,7 @@
 
 namespace luklew\MyLittlePing\Connection\NullConnection;
 
-use luklew\MyLittlePing\Connection\ConnectionInterface;
+use luklew\Connection\AbstractConnection;
 
 /**
  * Null Connection class used to test the library
@@ -10,35 +10,17 @@ use luklew\MyLittlePing\Connection\ConnectionInterface;
  *
  * @package luklew\MyLittlePing\Connection\NullConnection
  */
-class NullConnection implements ConnectionInterface
+class NullConnection extends AbstractConnection
 {
     /**
      * {@inheritdoc}
-     * 
+     *
      * @param string $host Destination host
-     * 
+     *
      * @return void
      */
     public function ping($host)
     {
-    }
-
-    /**
-     * {@inheritdoc}
-     * 
-     * @return void
-     */
-    public function getErrorMessage()
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     * 
-     * @return int
-     */
-    public function getLatency()
-    {
-        return rand(5, 55);
+        $this->latency = rand(5, 55);
     }
 }

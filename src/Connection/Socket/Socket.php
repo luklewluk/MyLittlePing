@@ -2,15 +2,15 @@
 
 namespace luklew\MyLittlePing\Connection\Socket;
 
+use luklew\Connection\AbstractConnection;
 use luklew\MyLittlePing\Config;
-use luklew\MyLittlePing\Connection\ConnectionInterface;
 
 /**
  * Socket implementation of connection
  *
  * @package luklew\MyLittlePing\Connection\Socket
  */
-class Socket implements ConnectionInterface
+class Socket extends AbstractConnection
 {
     /**
      * Data packet
@@ -18,27 +18,6 @@ class Socket implements ConnectionInterface
      * @var Packet
      */
     protected $packet;
-
-    /**
-     * Configuration
-     *
-     * @var Config
-     */
-    protected $config;
-
-    /**
-     * Error message
-     *
-     * @var string
-     */
-    protected $errorMessage;
-
-    /**
-     * Latency in milliseconds
-     *
-     * @var int
-     */
-    protected $latency;
 
     /**
      * Package string
@@ -50,12 +29,13 @@ class Socket implements ConnectionInterface
     /**
      * Constructor
      *
-     * @param Config        $config Configuration
-     * @param Packet|null   $packet Data packet
+     * @param Config      $config Configuration
+     * @param Packet|null $packet Data packet
      */
     public function __construct(Config $config, Packet $packet = null)
     {
-        $this->config = $config;
+        parent::__construct($config);
+
         $this->packet = $packet === null ? new Packet() : $packet;
     }
 
@@ -84,47 +64,22 @@ class Socket implements ConnectionInterface
                     'sec' => 10,
                     'usec' => 0,
                 ));
-                // Prevent errors from being printed when host is unreachable.
                 @socket_connect($socket, $host, $this->config->getPort());
-                $start = microtime(true);
-                // Send the package.
+                $this->startTimer();
                 @socket_send($socket, $this->package, strlen($this->package), 0);
                 if (socket_read($socket, 255) !== false) {
-                    $latency = microtime(true) - $start;
-                    $latency = round($latency * 1000);
+                    $latency = $this->stopTimer();
                 } else {
                     $latency = false;
                 }
             } else {
                 throw new \Exception('Unable to open socket');
             }
-            // Close the socket.
             socket_close($socket);
 
             $this->latency = $latency;
-
         } catch (\Exception $e) {
             $this->errorMessage = $e->getMessage();
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     * 
-     * @return string Error message
-     */
-    public function getErrorMessage()
-    {
-        return $this->errorMessage;
-    }
-
-    /**
-     * {@inheritdoc}
-     * 
-     * @return int Latency in milliseconds
-     */
-    public function getLatency()
-    {
-        return $this->latency;
     }
 }

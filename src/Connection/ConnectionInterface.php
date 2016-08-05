@@ -10,13 +10,6 @@ namespace luklew\MyLittlePing\Connection;
 interface ConnectionInterface
 {
     /**
-     * Get error message
-     *
-     * @return string Error message
-     */
-    public function getErrorMessage();
-
-    /**
      * Ping a server
      *
      * @param string $host Host address or domain
@@ -24,6 +17,13 @@ interface ConnectionInterface
      * @return void
      */
     public function ping($host);
+
+    /**
+     * Get error message
+     *
+     * @return string Error message
+     */
+    public function getErrorMessage();
 
     /**
      * Get latency
