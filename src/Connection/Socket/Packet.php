@@ -101,9 +101,13 @@ class Packet
      * Set payload
      *
      * @param string $payload
+     *
+     * @return $this
      */
     public function setPayload($payload)
     {
         $this->payload = $payload;
+
+        return $this;
     }
 }
