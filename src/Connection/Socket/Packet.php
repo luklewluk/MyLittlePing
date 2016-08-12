@@ -38,7 +38,7 @@ class Packet
      * part of packet
      * Length: 16 bits
      */
-    protected $checksum = "\x00\x00";
+    protected $checksum;
 
     /**
      * Payload data sending with a ping.
@@ -71,6 +71,8 @@ class Packet
      */
     public function generateChecksum()
     {
+        $this->checksum = "\x00\x00";
+
         $data = $this->getPacketString();
         if (strlen($data) % 2) {
             $data .= "\x00";
