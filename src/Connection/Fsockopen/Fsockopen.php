@@ -24,9 +24,9 @@ class Fsockopen extends AbstractConnection
     public function ping($host)
     {
         $this->startTimer();
-        $fp = @fsockopen($host, $this->config->getPort(), $errNo, $errStr, 10);
+        $fp = @fsockopen($host, $this->config->getPort(), $errNo, $errStr, 5);
 
-        if (!$fp) {
+        if ($fp === false) {
             $this->latency = false;
             $this->errorMessage = [
                 'errNo'  => $errNo,

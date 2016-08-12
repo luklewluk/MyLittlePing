@@ -88,7 +88,7 @@ class Ping
      *
      * @return Ping
      */
-    public static function createWithConnection($connectionType)
+    static public function createWithConnection($connectionType)
     {
         $config = new Config();
         $connection = ConnectionFactory::create($connectionType, $config);

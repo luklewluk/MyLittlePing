@@ -13,6 +13,11 @@ use luklew\MyLittlePing\Config;
 class Socket extends AbstractConnection
 {
     /**
+     * Connection timeout in seconds
+     */
+    const TIMEOUT = 5;
+
+    /**
      * Data packet
      *
      * @var Packet
@@ -48,8 +53,7 @@ class Socket extends AbstractConnection
      */
     public function ping($host)
     {
-        // TODO: IF added temporary due to issue that disallows generate checksum twice
-        if ($this->package === null) {
+        if ($this->packet->getPayload() !== $this->config->getPayload()) {
             $this->package = $this->packet
                 ->setPayload($this->config->getPayload())
                 ->generateChecksum()
@@ -61,7 +65,7 @@ class Socket extends AbstractConnection
         try {
             if (@$socket = socket_create(AF_INET, SOCK_RAW, 1)) {
                 socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array(
-                    'sec' => 10,
+                    'sec' => self::TIMEOUT,
                     'usec' => 0,
                 ));
                 @socket_connect($socket, $host, $this->config->getPort());
