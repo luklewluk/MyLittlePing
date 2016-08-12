@@ -34,7 +34,7 @@ class Ping
      */
     public function __construct(
         ConnectionInterface $connection,
-        Config $config = null
+        Config $config
     ) {
         $this->connection = $connection;
         $this->config = $config;
