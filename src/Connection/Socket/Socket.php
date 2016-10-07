@@ -8,7 +8,7 @@ use luklew\MyLittlePing\Config;
 /**
  * Socket implementation of connection
  *
- * @package luklew\MyLittlePing\Connection\Socket
+ * @package luklew\MyLittlePing
  * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 class Socket extends AbstractConnection

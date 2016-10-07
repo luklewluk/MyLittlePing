@@ -8,7 +8,7 @@ use luklew\MyLittlePing\Connection\AbstractConnection;
  * Null Connection class used to test the library
  * without making an actual connection
  *
- * @package luklew\MyLittlePing\Connection\NullConnection
+ * @package luklew\MyLittlePing
  * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 class NullConnection extends AbstractConnection

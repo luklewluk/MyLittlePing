@@ -7,7 +7,7 @@ use luklew\MyLittlePing\Config;
 /**
  * Abstract Connection Class
  *
- * @package luklew\Connection
+ * @package luklew\MyLittlePing
  * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 abstract class AbstractConnection implements ConnectionInterface

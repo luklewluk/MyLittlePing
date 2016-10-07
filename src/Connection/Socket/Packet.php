@@ -5,7 +5,7 @@ namespace luklew\MyLittlePing\Connection\Socket;
 /**
  * Class of ICMP packet
  *
- * @package luklew\MyLittlePing\Connection\Socket
+ * @package luklew\MyLittlePing
  * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 class Packet

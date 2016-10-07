@@ -7,7 +7,7 @@ use luklew\MyLittlePing\Config;
 /**
  * Factory for connections
  *
- * @package luklew\MyLittlePing\Connection
+ * @package luklew\MyLittlePing
  * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 class ConnectionFactory
