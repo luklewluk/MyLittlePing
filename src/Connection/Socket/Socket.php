@@ -2,13 +2,14 @@
 
 namespace luklew\MyLittlePing\Connection\Socket;
 
-use luklew\Connection\AbstractConnection;
+use luklew\MyLittlePing\Connection\AbstractConnection;
 use luklew\MyLittlePing\Config;
 
 /**
  * Socket implementation of connection
  *
  * @package luklew\MyLittlePing\Connection\Socket
+ * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 class Socket extends AbstractConnection
 {

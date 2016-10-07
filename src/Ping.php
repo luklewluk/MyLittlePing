@@ -9,6 +9,7 @@ use luklew\MyLittlePing\Connection\ConnectionInterface;
  * Main Ping library class
  *
  * @package luklew\MyLittlePing
+ * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 class Ping
 {

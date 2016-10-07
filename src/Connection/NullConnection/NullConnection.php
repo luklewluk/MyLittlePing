@@ -2,13 +2,14 @@
 
 namespace luklew\MyLittlePing\Connection\NullConnection;
 
-use luklew\Connection\AbstractConnection;
+use luklew\MyLittlePing\Connection\AbstractConnection;
 
 /**
  * Null Connection class used to test the library
  * without making an actual connection
  *
  * @package luklew\MyLittlePing\Connection\NullConnection
+ * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 class NullConnection extends AbstractConnection
 {

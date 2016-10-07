@@ -1,10 +1,15 @@
 <?php
 
-namespace luklew\Connection;
+namespace luklew\MyLittlePing\Connection;
 
 use luklew\MyLittlePing\Config;
-use luklew\MyLittlePing\Connection\ConnectionInterface;
 
+/**
+ * Abstract Connection Class
+ *
+ * @package luklew\Connection
+ * @author  Lukasz Lewandowski <luklewluk@gmail.com>
+ */
 abstract class AbstractConnection implements ConnectionInterface
 {
     /**

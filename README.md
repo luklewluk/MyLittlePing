@@ -36,24 +36,22 @@ $connection = new Socket($config);
 ```
 
 ### Fsockopen
-It is not recommended to get exact latency time. 
+It is not recommended way to get exact latency time. 
 Also it can return response time even if server is not responding.
 
-The method does not support all of custom parameters.
+The method does not support custom parameters.
 
 ```
 $connection = new Fsockopen($config);
 ```
 
 ### Your own implementation
-If you need to use your own connection method (i.e. "exec") you 
-can easily do it. Just remember to implement `ConnectionInterface`.
+If you need to use your own connection method (i.e. "exec" way) you 
+can easily do it by writing a new class which implements `ConnectionInterface`.
 
 ```
 $ping = new Ping(new YourClass(), $config);
 ```
-
-
 
 ## Custom parameters
 List of available parameters to set:
