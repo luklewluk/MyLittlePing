@@ -5,7 +5,8 @@ namespace luklew\MyLittlePing\Connection;
 /**
  * Interface for connection methods
  *
- * @package luklew\MyLittlePing\Connection
+ * @package luklew\MyLittlePing
+ * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 interface ConnectionInterface
 {

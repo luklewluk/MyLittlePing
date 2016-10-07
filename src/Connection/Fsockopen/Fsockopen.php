@@ -1,8 +1,8 @@
 <?php
 
-namespace luklew\Connection\Fsockopen;
+namespace luklew\MyLittlePing\Connection\Fsockopen;
 
-use luklew\Connection\AbstractConnection;
+use luklew\MyLittlePing\Connection\AbstractConnection;
 
 /**
  * Fsockopen implementation of connection
@@ -10,7 +10,8 @@ use luklew\Connection\AbstractConnection;
  * Basic support of this method added as an example.
  * It's not recommended way to get the actual latency.
  *
- * @package luklew\MyLittlePing\Connection\Socket
+ * @package luklew\MyLittlePing
+ * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 class Fsockopen extends AbstractConnection
 {

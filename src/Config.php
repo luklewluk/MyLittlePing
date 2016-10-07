@@ -6,6 +6,7 @@ namespace luklew\MyLittlePing;
  * Options for ping
  *
  * @package luklew\MyLittlePing
+ * @author  Lukasz Lewandowski <luklewluk@gmail.com>
  */
 class Config
 {

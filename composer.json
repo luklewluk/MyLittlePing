@@ -1,0 +1,29 @@
+{
+  "name": "luklewluk/mylittleping",
+  "description": "Advanced ping library for PHP",
+  "keywords": [
+    "ping",
+    "library",
+    "host",
+    "client",
+    "delay",
+    "latency",
+    "request",
+    "response"
+  ],
+  "homepage": "https://github.com/luklewluk/MyLittlePing",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Lukasz Lewandowski",
+      "email": "luklewluk@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "luklew\\MyLittlePing\\": "src"
+    }
+  }
+}

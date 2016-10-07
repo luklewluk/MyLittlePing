@@ -1,20 +1,12 @@
 <?php
 
-use luklew\Connection\Fsockopen\Fsockopen;
 use luklew\MyLittlePing\Config;
+use luklew\MyLittlePing\Connection\Fsockopen\Fsockopen;
 use luklew\MyLittlePing\Connection\NullConnection\NullConnection;
 use luklew\MyLittlePing\Connection\Socket\Socket;
 use luklew\MyLittlePing\Ping;
 
-require_once 'src/Config.php';
-require_once 'src/Ping.php';
-require_once 'src/Connection/ConnectionInterface.php';
-require_once 'src/Connection/AbstractConnection.php';
-require_once 'src/Connection/ConnectionFactory.php';
-require_once 'src/Connection/NullConnection/NullConnection.php';
-require_once 'src/Connection/Socket/Socket.php';
-require_once 'src/Connection/Socket/Packet.php';
-require_once 'src/Connection/Fsockopen/Fsockopen.php';
+require_once '../vendor/autoload.php';
 
 // Basic usage
 $ping = Ping::createWithConnection(Fsockopen::class);
